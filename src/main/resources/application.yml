@@ -1,0 +1,22 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: gatewayservices
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8060/eureka
+zuul:
+  ignored-services: '*'
+  routes:
+    ws_bankmanagement_loan:
+      path: /loanservices/**
+      serviceId: ws_bankmanagement_loan
+      stripPrefix: false
+    ws_bankmanagement_customer:
+      path: /customerservices/**
+      serviceId: ws_bankmanagement_customer
+      stripPrefix: false
+  sensitive-headers: Cookie,Set-Cookie
